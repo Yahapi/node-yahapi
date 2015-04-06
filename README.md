@@ -23,6 +23,7 @@ import { ValidationError, UnauthorizedError } from 'yahapi';
 
 - **BadRequestError**: 400 error when request body was syntactically incorrect. 
 - **UnauthorizedError**: 401 error when user is not authenticated or credentials are invalid. 
+- **ForbiddenError**: 403 error when user is authenticated but has insufficient priviliges to access or modify resource. 
 - **ResourceNotFoundError**: 404 error when a resource request could not be resolved.
 - **ResourceExistsError**: 409 error when a POST request was found invalid because it conflicts with an existing resource.
 - **ValidationError**: 422 error when server understood the request and it is syntactically correct but was unable to process the request.
