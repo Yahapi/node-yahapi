@@ -25,14 +25,14 @@ var paths = {
     test: ['test/**/*.js']
 };
 
-gulp.task('lint', 'Lints all js', function() {
+gulp.task('lint', 'Checks for style issues and possible code errors.', function() {
     return gulp.src(paths.lint)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', 'Runs all unit tests', function(cb) {
+gulp.task('test', 'Runs all tests.', function(cb) {
     gulp.src(paths.coverage)
         .pipe(istanbul()) // Covering files
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
@@ -54,10 +54,10 @@ gulp.task('coveralls', 'Pushes coverage data to coveralls.io', ['clean'], functi
         .pipe(coveralls());
 });
 
-gulp.task('clean', function (cb) {
+gulp.task('clean', 'Removes temporary directories.', function (cb) {
   del(paths.clean, cb);
 });
 
-gulp.task('build', 'Runs lint and tests', ['lint', 'test']);
-gulp.task('ci', 'Runs CI server tasks', ['build', 'coveralls']);
-gulp.task('default', 'Default task', ['build']);
+gulp.task('build', 'Runs lint and test tasks.', ['lint', 'test']);
+gulp.task('ci', 'Runs CI server tasks.', ['build', 'coveralls']);
+gulp.task('default', 'Runs lint and test tasks.', ['build']);

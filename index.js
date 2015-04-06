@@ -9,5 +9,5 @@ for (var property in errors) {
     module.exports[property] = errors[property];
 }
 
-module.exports.LinksBuilder = LinksBuilder
+module.exports.LinksBuilder = LinksBuilder;
 module.exports.Collection = Collection;
