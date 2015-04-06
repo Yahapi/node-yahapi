@@ -7,7 +7,8 @@ This library contains utility classes for building a Yahapi-style REST API.
 Currently it contains the following classes:
 
 - **errors**: a collection of common HTTP errors.
-- **LinksBuilder**:
+- **LinksBuilder**: helper to add links to your JSON response.
+- **Collection**: helper to create a collection resource representation.
 
 ## Errors
 
@@ -45,3 +46,5 @@ util.inherits(TeapotError, RestError);
 ```
 
 ## LinksBuilder
+
+## Collection

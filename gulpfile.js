@@ -49,7 +49,7 @@ gulp.task('test', 'Runs all unit tests', function(cb) {
         });
 });
 
-gulp.task('coveralls', 'Pushes coverage data to coveralls.io', function() {
+gulp.task('coveralls', 'Pushes coverage data to coveralls.io', ['clean'], function() {
     return gulp.src('coverage/lcov.info')
         .pipe(coveralls());
 });
@@ -58,27 +58,6 @@ gulp.task('clean', function (cb) {
   del(paths.clean, cb);
 });
 
-gulp.task('build', 'Runs lint, tests and code coverage', function(callback) {
-    runSequence(
-        'clean',
-        'lint',
-        'test',
-        function() {
-            process.exit(0); // Always close even if other processes are still running
-            callback();
-        });
-});
-
-gulp.task('ci', 'Runs CI server tasks', function(callback) {
-    runSequence(
-        'clean',
-        'lint',
-        'test',
-        'coveralls',
-        function() {
-            process.exit(0); // Always close even if other processes are still running
-            callback();
-        });
-});
-
+gulp.task('build', 'Runs lint and tests', ['lint', 'test']);
+gulp.task('ci', 'Runs CI server tasks', ['build', 'coveralls']);
 gulp.task('default', 'Default task', ['build']);
