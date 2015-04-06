@@ -13,7 +13,7 @@ Currently it contains the following classes:
 
 Example:
 
-```
+```javascript
 // ES 5
 var UnauthorizedError = require('yahapi').UnauthorizedError;
 
