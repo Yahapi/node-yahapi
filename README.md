@@ -3,3 +3,31 @@
 [![Build Status](https://travis-ci.org/Yahapi/node-yahapi.svg?branch=master)](https://travis-ci.org/Yahapi/node-yahapi) [![Coverage Status](https://coveralls.io/repos/Yahapi/node-yahapi/badge.svg?branch=master)](https://coveralls.io/r/Yahapi/node-yahapi?branch=master)
 
 This library contains utility classes for building a Yahapi-style REST API.
+
+Currently it contains the following classes:
+
+- **errors**: a collection of common HTTP errors.
+- **LinksBuilder**: 
+
+## Errors
+
+Example:
+
+```
+// ES 5
+var UnauthorizedError = require('yahapi').UnauthorizedError;
+
+// ES 6
+import { ValidationError, UnauthorizedError } from 'yahapi';
+```
+
+- **BadRequestError**: 400 error when request body was syntactically incorrect. 
+- **UnauthorizedError**: 401 error when user is not authenticated or credentials are invalid. 
+- **ResourceNotFoundError**: 404 error when a resource request could not be resolved.
+- **ResourceExistsError**: 409 error when a POST request was found invalid because it conflicts with an existing resource.
+- **ValidationError**: 422 error when server understood the request and it is syntactically correct but was unable to process the request.
+- **AssertError**: 500 error when a coding assertion failed.
+- **DatabaseError**: 500 error when database connectivity or database constraints failed.
+
+  
+## LinksBuilder
