@@ -6,6 +6,7 @@ var util = require('util');
 var BadRequestError = require('../index').BadRequestError;
 var ValidationError = require('../index').ValidationError;
 var UnauthorizedError = require('../index').UnauthorizedError;
+var ForbiddenError = require('../index').ForbiddenError;
 var ResourceNotFoundError = require('../index').ResourceNotFoundError;
 var ResourceExistsError = require('../index').ResourceExistsError;
 var DatabaseError = require('../index').DatabaseError;
@@ -30,6 +31,16 @@ describe('RestErrors', function() {
             status: 401,
             code: 'unauthorized-error',
             message: 'Missing or invalid user credentials'
+        });
+    });
+
+    it('should return a valid ForbiddenError with HTTP status 403', function() {
+        var error = new ForbiddenError();
+        assert.instanceOf(error, Error);
+        assert.deepEqual(error, {
+            status: 403,
+            code: 'forbidden-error',
+            message: 'Invalid priviliges'
         });
     });
 
