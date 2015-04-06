@@ -49,7 +49,7 @@ gulp.task('test', 'Runs all tests.', function(cb) {
         });
 });
 
-gulp.task('coveralls', 'Pushes coverage data to coveralls.io', ['clean'], function() {
+gulp.task('coveralls', 'Pushes coverage data to coveralls.io', ['clean', 'test'], function() {
     return gulp.src('coverage/lcov.info')
         .pipe(coveralls());
 });
@@ -59,5 +59,5 @@ gulp.task('clean', 'Removes temporary directories.', function (cb) {
 });
 
 gulp.task('build', 'Runs lint and test tasks.', ['lint', 'test']);
-gulp.task('ci', 'Runs CI server tasks.', ['build', 'coveralls']);
+gulp.task('ci', 'Runs CI server tasks.', ['lint', 'coveralls']);
 gulp.task('default', 'Runs lint and test tasks.', ['build']);
