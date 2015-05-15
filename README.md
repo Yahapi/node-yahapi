@@ -36,11 +36,11 @@ The following errors are available:
 If you want to define your own errors you should inherit from `RestError`, for example:
 
 ```javascript
-var util = require("util");
-var RestError = require("yahapi").RestError;
+var util = require('util');
+var RestError = require('yahapi').RestError;
 
 function TeapotError() {
-    RestError.call(this, 418, "teapot-error", "I'm a teapot");
+    RestError.call(this, 418, 'teapot', 'I\'m a teapot');
 }
 util.inherits(TeapotError, RestError);
 ```
