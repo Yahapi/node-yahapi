@@ -49,7 +49,7 @@ gulp.task('test', 'Runs all tests.', function(cb) {
         });
 });
 
-gulp.task('coveralls', 'Pushes coverage data to coveralls.io', ['clean'], function() {
+gulp.task('coveralls', 'Pushes coverage data to coveralls.io', function() {
     return gulp.src('coverage/lcov.info')
         .pipe(coveralls());
 });
