@@ -26,7 +26,7 @@ describe('Collection', function () {
             var result = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).paginate(10).build();
             assert.deepEqual(result.links, {
                 self: { href: 'http://www.example.org/test/12345?limit=3&offset=12' },
-                prev: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
+                previous: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
                 next: { href: 'http://www.example.org/test/12345?limit=3&offset=15' },
                 first: { href: 'http://www.example.org/test/12345?limit=3&offset=0' }
             });
