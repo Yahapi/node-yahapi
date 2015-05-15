@@ -5,7 +5,7 @@
   "contributors": [
     "Niels Krijger <niels@kryger.nl"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/yahapi/node-yahapi.git",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "async": "~0.9.0",
-    "lodash": "^3.3.1",
+    "lodash": "^3.6.0",
     "validator": "^3.32.0"
   },
   "devDependencies": {

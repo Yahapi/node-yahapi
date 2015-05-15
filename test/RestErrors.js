@@ -19,7 +19,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 400,
-            code: 'bad-request-error',
+            code: 'bad_request',
             message: 'Request body is invalid'
         });
     });
@@ -29,7 +29,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 401,
-            code: 'unauthorized-error',
+            code: 'unauthorized',
             message: 'Missing or invalid user credentials'
         });
     });
@@ -39,7 +39,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 403,
-            code: 'forbidden-error',
+            code: 'forbidden',
             message: 'Invalid priviliges'
         });
     });
@@ -49,7 +49,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 404,
-            code: 'resource-not-found-error',
+            code: 'resource_not_found',
             message: 'Unable to find resource'
         });
     });
@@ -59,7 +59,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 409,
-            code: 'resource-exists-error',
+            code: 'resource_exists',
             message: 'Unable to find resource'
         });
     });
@@ -69,7 +69,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 422,
-            code: 'validation-error',
+            code: 'validation',
             message: 'One or more request parameters are invalid',
             errors: 'Invalid message!'
         });
@@ -80,7 +80,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 500,
-            code: 'assert-error',
+            code: 'assert',
             message: 'Invalid message!'
         });
     });
@@ -92,7 +92,7 @@ describe('RestErrors', function() {
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
             status: 500,
-            code: 'database-error',
+            code: 'database',
             message: 'Unable to connect to database',
             errors: {
                 test: 'test'
