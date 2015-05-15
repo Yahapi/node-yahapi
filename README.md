@@ -37,7 +37,7 @@ If you want to define your own errors you should inherit from `RestError`, for e
 
 ```javascript
 var util = require("util");
-var RestErrors = require("yahapi").RestErrors;
+var RestError = require("yahapi").RestError;
 
 function TeapotError() {
     RestError.call(this, 418, "teapot-error", "I'm a teapot");
