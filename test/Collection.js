@@ -18,10 +18,43 @@ describe('Collection', function () {
         // TODO should add links with query parameters inherited from base url
     });
 
+    describe('metadata', function() {
+        it('should add pagination metadata', function () {
+            var result = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).paginate(10, 320).build();
+            assert.deepEqual(result.meta, {
+                limit: 3,
+                offset: 12,
+                size: 10,
+                total: 320
+            });
+        });
+
+        it('should add custom metadata', function () {
+            var collection = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items);
+            var result = collection.meta({ elm1: 'var1', elm2: { elm3: 3 } }).meta({ elm4: 4 }).build();
+            assert.deepEqual(result.meta, {
+                elm1: 'var1',
+                elm2: { elm3: 3 },
+                elm4: 4
+            });
+        });
+
+        it('should combine pagination and custom metadata', function () {
+            var collection = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).paginate(10, 3);
+            var result = collection.meta({ elm1: 'var1', elm2: { elm3: 3 } }).meta({ elm4: 4 }).build();
+            assert.deepEqual(result.meta, {
+                elm1: 'var1',
+                elm2: { elm3: 3 },
+                elm4: 4,
+                limit: 3,
+                offset: 12,
+                size: 30,
+                total: 3
+            });
+        });
+    });
+
     describe('paginate', function () {
-
-        // TODO check for metadata
-
         it('should add limit and offset query parameters and include `prev` and `next` links', function () {
             var result = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).paginate(10).build();
             assert.deepEqual(result.links, {
