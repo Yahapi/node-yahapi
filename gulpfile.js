@@ -32,7 +32,7 @@ gulp.task('lint', 'Checks for style issues and possible code errors.', function(
         .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', 'Runs all tests.', function(cb) {
+gulp.task('test', 'Runs all tests.', ['clean'], function(cb) {
     gulp.src(paths.coverage)
         .pipe(istanbul()) // Covering files
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
