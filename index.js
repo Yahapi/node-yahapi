@@ -9,6 +9,5 @@ for (var property in RestErrors) {
     module.exports[property] = RestErrors[property];
 }
 
-module.exports.RestError = RestErrors.RestError;
 module.exports.Links = Links;
 module.exports.Collection = Collection;

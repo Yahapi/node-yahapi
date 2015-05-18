@@ -54,7 +54,7 @@ describe('RestErrors', function() {
         });
     });
 
-    it('should return a valid `ResourceExistsError` with HTTP status 409', function() {
+    it('should return a valid ResourceExistsError with HTTP status 409', function() {
         var error = new ResourceExistsError('Unable to find resource');
         assert.instanceOf(error, Error);
         assert.deepEqual(error, {
