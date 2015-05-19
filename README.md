@@ -10,39 +10,41 @@ Currently it contains the following classes:
 - **LinksBuilder**: helper to add links to your JSON response.
 - **Collection**: helper to create a collection resource representation.
 
-## Errors
+## Collection
 
-Example:
-
-```javascript
-// ES 5
-var UnauthorizedError = require('yahapi').UnauthorizedError;
-
-// ES 6
-import { ValidationError, UnauthorizedError } from 'yahapi';
-```
-
-The following errors are available:
-
-- **400 BadRequestError**: when request body was syntactically incorrect.
-- **401 UnauthorizedError**: when user is not authenticated or credentials are invalid.
-- **403 ForbiddenError**: when user is authenticated but has insufficient priviliges to access or modify resource.
-- **404 ResourceNotFoundError**: when a resource request could not be resolved.
-- **409 ResourceExistsError**: when a POST request was found invalid because it conflicts with an existing resource.
-- **422 ValidationError**: when server understood the request and it is syntactically correct but was unable to process the request.
-- **500 AssertError**: when a coding assertion failed.
-- **500 DatabaseError**: when database connectivity or database constraints failed.
-
-If you want to define your own errors you should inherit from `RestError`, for example:
+The collection resource representation contains an array with additional metadata
+and links to aid simplify the client when paginating, sorting or drilling down.
 
 ```javascript
-var util = require('util');
-var RestError = require('yahapi').RestError;
+var Collection = require('yahapi').Collection;
 
-function TeapotError() {
-    RestError.call(this, 418, 'teapot', 'I\'m a teapot');
+var items = [1,2,3,4,5,6];
+var requestUrl = 'http://www.example.org/test/12345?limit=3&offset=0';
+
+var collection = new Collection(requestUrl, items)
+    .paginate(10, 23)
+    .transform(function(elm) { return elm * 2 })
+    .link('customLink', '/my/custom/link')
+    .build();
+
+console.log(collection);
+/*
+{
+    meta: {
+        total: 23,
+        size: 6,
+        offset: 0,
+        limit: 3
+    },
+    items: [ 2, 4, 6, 8, 10, 12 ],
+    links: {
+        self: { href: 'http://www.example.org/test/12345?limit=3&offset=0' },
+        next: { href: 'http://www.example.org/test/12345?limit=3&offset=3' },
+        first: { href: 'http://www.example.org/test/12345?limit=3&offset=0' },
+        last: { href: 'http://www.example.org/test/12345?limit=3&offset=21' },
+        customLink: { href: 'http://www.example.org/my/custom/link' }
+    }
 }
-util.inherits(TeapotError, RestError);
 ```
 
 ## Links
@@ -95,15 +97,41 @@ console.log(links.get());
 
 ```
 
-## Collection
+## Errors
 
+The errors classes aid in creating a consistent amd understandable API.
+
+Example:
 
 ```javascript
-var Collection = require('yahapi').Collection;
+// ES 5
+var UnauthorizedError = require('yahapi').UnauthorizedError;
 
-var items = [1,2,3,4,5,6];
-var self = 'http://www.example.org/test/12345?limit=3&offset=0';
-new Collection(items, self).paginate(10, 3).build()
+// ES 6
+import { ValidationError, UnauthorizedError } from 'yahapi';
+```
+
+The following errors are available:
+
+- **400 BadRequestError**: when request body was syntactically incorrect.
+- **401 UnauthorizedError**: when user is not authenticated or credentials are invalid.
+- **403 ForbiddenError**: when user is authenticated but has insufficient priviliges to access or modify resource.
+- **404 ResourceNotFoundError**: when a resource request could not be resolved.
+- **409 ResourceExistsError**: when a POST request was found invalid because it conflicts with an existing resource.
+- **422 ValidationError**: when server understood the request and it is syntactically correct but was unable to process the request.
+- **500 AssertError**: when a coding assertion failed.
+- **500 DatabaseError**: when database connectivity or database constraints failed.
+
+If you want to define your own errors you should inherit from `RestError`, for example:
+
+```javascript
+var util = require('util');
+var RestError = require('yahapi').RestError;
+
+function TeapotError() {
+    RestError.call(this, 418, 'teapot', 'I\'m a teapot');
+}
+util.inherits(TeapotError, RestError);
 ```
 
 ## Contribute
