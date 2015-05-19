@@ -18,8 +18,8 @@ describe('Collection', function () {
     describe('items', function() {
         it('should transform items', function() {
             var func = function(elm) {
-                return { num: elm.num * 2 }
-            }
+                return { num: elm.num * 2 };
+            };
             var result = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).transform(func).build();
             assert.deepEqual(result.items, [
                 { num: 0 }, { num: 2 }, { num: 4 }, { num: 6 }, { num: 8 }
