@@ -2,18 +2,18 @@
 
 [![Build Status](https://travis-ci.org/Yahapi/node-yahapi.svg?branch=master)](https://travis-ci.org/Yahapi/node-yahapi) [![Coverage Status](https://coveralls.io/repos/Yahapi/node-yahapi/badge.svg?branch=master)](https://coveralls.io/r/Yahapi/node-yahapi?branch=master)
 
-This library contains utility classes for building a Yahapi-style REST API in Node/IO.
+This library contains utility classes for building a Yahapi-style REST API in Node/IO.js
 
 Currently it contains the following classes:
 
+- **Collection**: utility class to create a collection resource representation.
+- **LinksBuilder**: utility class to add links to your JSON response.
 - **RestErrors**: a collection of common HTTP errors.
-- **LinksBuilder**: helper to add links to your JSON response.
-- **Collection**: helper to create a collection resource representation.
 
 ## Collection
 
 The collection resource representation contains an array with additional metadata
-and links to aid simplify the client when paginating, sorting or drilling down.
+and links to aid the client with paginating, sorting and/or drilling down.
 
 ```javascript
 var Collection = require('yahapi').Collection;
@@ -21,13 +21,13 @@ var Collection = require('yahapi').Collection;
 var items = [1,2,3,4,5,6];
 var requestUrl = 'http://www.example.org/test/12345?limit=3&offset=0';
 
-var collection = new Collection(requestUrl, items)
+var result = new Collection(requestUrl, items)
     .paginate(10, 23)
     .transform(function(elm) { return elm * 2 })
     .link('customLink', '/my/custom/link')
     .build();
 
-console.log(collection);
+console.log(result);
 /*
 {
     meta: {

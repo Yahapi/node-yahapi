@@ -7,7 +7,7 @@ var requestUrl = 'http://www.example.org/test/12345?limit=3&offset=0';
 
 var collection = new Collection(requestUrl, items)
     .paginate(10, 23)
-    .transform(function(elm) { return elm * 2 })
+    .transform(function(elm) { return elm * 2; })
     .link('customLink', '/my/custom/link')
     .build();
 
