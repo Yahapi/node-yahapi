@@ -45,7 +45,7 @@ describe('Collection', function () {
             var result = collection.link('rel2', 'http://www.2.org', { test: 1 }).link('rel2', 'http://www.3.org').build();
             assert.deepEqual(result.links, {
                 self: { href: 'http://www.example.org/test/12345?limit=3&offset=12' },
-                previous: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
+                prev: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
                 first: { href: 'http://www.example.org/test/12345?limit=3&offset=0' },
                 last: { href: 'http://www.example.org/test/12345?limit=3&offset=3' },
                 rel1: { href: 'http://www.1.org' },
@@ -91,17 +91,17 @@ describe('Collection', function () {
     });
 
     describe('paginate', function () {
-        it('should add limit and offset query parameters and include `previous` and `next` links', function () {
+        it('should add limit and offset query parameters and include `prev` and `next` links', function () {
             var result = new Collection('http://www.example.org/test/12345?limit=3&offset=12', items).paginate(10).build();
             assert.deepEqual(result.links, {
                 self: { href: 'http://www.example.org/test/12345?limit=3&offset=12' },
-                previous: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
+                prev: { href: 'http://www.example.org/test/12345?limit=3&offset=9' },
                 next: { href: 'http://www.example.org/test/12345?limit=3&offset=15' },
                 first: { href: 'http://www.example.org/test/12345?limit=3&offset=0' }
             });
         });
 
-        it('should exclude `previous` link when `offset = 0`', function () {
+        it('should exclude `prev` link when `offset = 0`', function () {
             var result = new Collection('http://www.example.org/test/12345?limit=3&offset=0').paginate(10, 4).build();
             assert.deepEqual(result.links, {
                 self: { href: 'http://www.example.org/test/12345?limit=3&offset=0' },

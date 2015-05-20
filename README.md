@@ -22,9 +22,10 @@ var items = [1,2,3,4,5,6];
 var requestUrl = 'http://www.example.org/test/12345?limit=3&offset=0';
 
 var result = new Collection(requestUrl, items)
-    .paginate(10, 23)
-    .transform(function(elm) { return elm * 2 })
-    .link('customLink', '/my/custom/link')
+    .paginate(10, 23) // Set default limit to 10 (can be overwritten in url) and total nr of items is 23
+    .transform(function(elm) { return elm * 2 }) // Use transform to change your model/entity from your representation
+    .link('customLink', '/my/custom/link') // Add your own links for discoverability
+    .meta('retrieved', new Date().toString()) // Add additional metadata when needed
     .build();
 
 console.log(result);
@@ -99,7 +100,7 @@ console.log(links.get());
 
 ## Errors
 
-The errors classes aid in creating a consistent amd understandable API.
+The error classes aid in creating a consistent and understandable API.
 
 Example:
 
